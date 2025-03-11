@@ -1,0 +1,17 @@
+syntax = "proto3";
+option go_package="shorturl/proto";
+package shorturl.zvoice.com;
+
+message Url{
+  string url=1;
+  int64  userID=2;
+}
+
+message ShortKey {
+  string key=1;
+  int64  userID=2;
+}
+service ShortUrl{
+  rpc GetShortUrl(Url) returns(Url);
+  rpc GetOriginUrl(ShortKey) returns(Url);
+}

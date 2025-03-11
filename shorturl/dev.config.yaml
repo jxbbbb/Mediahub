@@ -1,0 +1,21 @@
+server:
+  ip: 0.0.0.0
+  port: 50051
+  accessToken: "nnjkdsfhg823yher9182ehduiosdfiby"
+  # debug、release
+  mode: debug
+redis:
+  host: "169.254.112.167"
+  port: 6379
+  pwd: ""
+mysql:
+  dsn: "root:12345@tcp(192.168.31.224:3306)/mediahub?collation=utf8mb4_unicode_ci&charset=utf8mb4"
+  maxLifeTime: 3600
+  maxOpenConn: 10
+  maxIdleConn: 10
+log:
+  # panic,fatal,error,warn,warning,info,debug,trace
+  level: "info"
+  logPath: "runtime/logs/app.log"
+shortDomain: "http://localhost:8081/p/"
+userShortDomain: "http://localhost:8081/u/"
