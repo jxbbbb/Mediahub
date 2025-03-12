@@ -4,7 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"mediahub/Controller"
+	"mediahub/controller"
 	"mediahub/middleware"
 	"mediahub/pkg/config"
 	"mediahub/pkg/log"
@@ -31,7 +31,7 @@ func main() {
 	logger.SetLevel(cnf.Log.Level)
 	logger.SetPrintCaller(true)
 	sf := cos.NewCosStorageFactory(cnf.Cos.BucketUrl, cnf.Cos.SecretId, cnf.Cos.SecretKey, cnf.Cos.CDNDomain)
-	controller := Controller.NewController(sf, logger, cnf)
+	controller := controller.NewController(sf, logger, cnf)
 
 	gin.SetMode(cnf.Http.Mode)
 	r := gin.Default()

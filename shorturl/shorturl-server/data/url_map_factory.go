@@ -2,6 +2,7 @@ package data
 
 import (
 	"database/sql"
+	"shorturl/pkg/constants"
 	"shorturl/pkg/log"
 )
 
@@ -23,9 +24,9 @@ func NewUrlMapDataFactory(log log.ILogger, db *sql.DB) IUrlMapDataFactory {
 }
 
 func (f *UrlMapDataFactory) NewUrlMapData(isPublic bool) IUrlMapData {
-	tableName := "url_map"
+	tableName := constants.TABLE_URL_MAP
 	if !isPublic {
-		tableName = "url_map_user"
+		tableName = constants.TABLE_URL_MAP_USER
 	}
 	return newUrlMapData(f.log, f.db, tableName)
 }

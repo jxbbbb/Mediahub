@@ -22,7 +22,7 @@ const (
 	ShortUrl_GetOriginUrl_FullMethodName = "/shorturl.zvoice.com.ShortUrl/GetOriginUrl"
 )
 
-// ShortUrlClient is the client API for ShortUrl service.
+// ShortUrlClient is the client API for ShortUrl services.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ShortUrlClient interface {
@@ -58,7 +58,7 @@ func (c *shortUrlClient) GetOriginUrl(ctx context.Context, in *ShortKey, opts ..
 	return out, nil
 }
 
-// ShortUrlServer is the server API for ShortUrl service.
+// ShortUrlServer is the server API for ShortUrl services.
 // All implementations must embed UnimplementedShortUrlServer
 // for forward compatibility.
 type ShortUrlServer interface {
@@ -83,7 +83,7 @@ func (UnimplementedShortUrlServer) GetOriginUrl(context.Context, *ShortKey) (*Ur
 func (UnimplementedShortUrlServer) mustEmbedUnimplementedShortUrlServer() {}
 func (UnimplementedShortUrlServer) testEmbeddedByValue()                  {}
 
-// UnsafeShortUrlServer may be embedded to opt out of forward compatibility for this service.
+// UnsafeShortUrlServer may be embedded to opt out of forward compatibility for this services.
 // Use of this interface is not recommended, as added methods to ShortUrlServer will
 // result in compilation errors.
 type UnsafeShortUrlServer interface {
@@ -137,7 +137,7 @@ func _ShortUrl_GetOriginUrl_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
-// ShortUrl_ServiceDesc is the grpc.ServiceDesc for ShortUrl service.
+// ShortUrl_ServiceDesc is the grpc.ServiceDesc for ShortUrl services.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var ShortUrl_ServiceDesc = grpc.ServiceDesc{

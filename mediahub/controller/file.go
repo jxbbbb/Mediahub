@@ -1,4 +1,4 @@
-package Controller
+package controller
 
 import (
 	"bytes"
@@ -83,8 +83,9 @@ func (c *Controller) Upload(ctx *gin.Context) {
 
 	client := proto2.NewShortUrlClient(clientConn)
 	in := &proto2.Url{
-		Url:    url,
-		UserID: userId,
+		Url:      url,
+		UserID:   userId,
+		IsPublic: userId == 0,
 	}
 	outGoingCtx := context.Background()
 	outGoingCtx = services.AppendBearerToken(outGoingCtx, c.config.DependOn.ShortUrl.AccessToken)

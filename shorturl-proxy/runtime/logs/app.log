@@ -1,0 +1,4 @@
+time="2025-03-12T16:25:37+08:00" level=error msg="rpc error: code = Unknown desc = 短链非法" file="C:/Users/Jxb/GolandProjects/Mediahub/shorturl-proxy/proxy/proxy.go:51" func="shorturl-proxy/proxy.(*proxy).getOriginalUrl"
+time="2025-03-12T16:25:37+08:00" level=error msg="rpc error: code = Unknown desc = 短链非法" file="C:/Users/Jxb/GolandProjects/Mediahub/shorturl-proxy/proxy/proxy.go:36" func="shorturl-proxy/proxy.(*proxy).redirection"
+time="2025-03-12T16:26:11+08:00" level=error msg="rpc error: code = Unknown desc = 短链非法" file="C:/Users/Jxb/GolandProjects/Mediahub/shorturl-proxy/proxy/proxy.go:51" func="shorturl-proxy/proxy.(*proxy).getOriginalUrl"
+time="2025-03-12T16:26:11+08:00" level=error msg="rpc error: code = Unknown desc = 短链非法" file="C:/Users/Jxb/GolandProjects/Mediahub/shorturl-proxy/proxy/proxy.go:36" func="shorturl-proxy/proxy.(*proxy).redirection"

@@ -1,0 +1,15 @@
+http:
+  ip: 127.0.0.1
+  port: 8081
+  # debug、release
+  mode: debug
+log:
+  # panic,fatal,error,warn,warning,info,debug,trace
+  level: "info"
+  logPath: "runtime/logs/app.log"
+shortDomain: "http://localhost:8081/p/"
+userShortDomain: "http://localhost:8081/u/"
+dependOn:
+  shortUrl:
+    address: "localhost:50051"
+    accessToken: "nnjkdsfhg823yher9182ehduiosdfiby"

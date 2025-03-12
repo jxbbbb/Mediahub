@@ -2,13 +2,16 @@ package server
 
 import (
 	"context"
+	"fmt"
 	"shorturl/pkg/config"
+	"shorturl/pkg/constants"
 	"shorturl/pkg/log"
 	"shorturl/pkg/utils"
 	"shorturl/pkg/zerror"
 	"shorturl/proto"
 	"shorturl/shorturl-server/cache"
 	"shorturl/shorturl-server/data"
+	"strconv"
 	"time"
 )
 
@@ -32,7 +35,7 @@ func NewService(config *config.Config, log log.ILogger, urlMapDataFactory data.I
 }
 
 func (s *shortURLService) GetShortUrl(ctx context.Context, in *proto.Url) (*proto.Url, error) {
-	isPublic := true
+	isPublic := in.IsPublic
 	if in.UserID != 0 {
 		isPublic = false
 	}
@@ -89,7 +92,7 @@ func (s *shortURLService) GetShortUrl(ctx context.Context, in *proto.Url) (*prot
 	}, nil
 }
 func (s *shortURLService) GetOriginUrl(ctx context.Context, in *proto.ShortKey) (*proto.Url, error) {
-	isPublic := true
+	isPublic := in.IsPublic
 	if in.UserID != 0 {
 		isPublic = false
 	}
@@ -119,7 +122,14 @@ func (s *shortURLService) GetOriginUrl(ctx context.Context, in *proto.ShortKey) 
 		s.log.Error(zerror.NewByErr(err))
 		return nil, err
 	}
+	//缓存穿透过滤
 	if originalUrl == "" {
+		err = s.idFilter(id, kvCache, isPublic)
+		if err != nil {
+			s.log.Error(err)
+			return nil, err
+		}
+
 		entity, err := data.GetByID(id)
 		if err != nil {
 			s.log.Error(zerror.NewByErr(err))
@@ -141,4 +151,30 @@ func (s *shortURLService) GetOriginUrl(ctx context.Context, in *proto.ShortKey) 
 		Url:    originalUrl,
 		UserID: in.UserID,
 	}, nil
+}
+
+func (s *shortURLService) idFilter(id int64, kvCache cache.KVCache, isPublic bool) error {
+	key := fmt.Sprintf("%s_%s", constants.TABLE_URL_MAP, "mxa_id")
+	if !isPublic {
+		key = fmt.Sprintf("%s_%s", constants.TABLE_URL_MAP_USER, "mxa_id")
+	}
+	idStr, err := kvCache.Get(key)
+	if err != nil {
+		s.log.Error(err)
+		return err
+	}
+	var res int64
+	if idStr != "" {
+		res, err = strconv.ParseInt(idStr, 10, 64)
+		if err != nil {
+			s.log.Error(err)
+			return err
+		}
+	}
+	if res < id {
+		err = zerror.NewByMsg("短链非法")
+		s.log.Error(err)
+		return err
+	}
+	return nil
 }
