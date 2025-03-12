@@ -1,3 +1,9 @@
+server:
+  ip: 0.0.0.0
+  port: 50051
+  accessToken: "nnjkdsfhg823yher9182ehduiosdfiby"
+  # debug、release
+  mode: debug
 redis:
   host: "169.254.112.167"
   port: 6379
@@ -11,3 +17,5 @@ log:
   # panic,fatal,error,warn,warning,info,debug,trace
   level: "info"
   logPath: "runtime/logs/app.log"
+shortDomain: "http://localhost:8081/p/"
+userShortDomain: "http://localhost:8081/u/"
