@@ -20,7 +20,7 @@ shortDomain: "http://localhost:8081/p/"
 userShortDomain: "http://localhost:8081/u/"
 cos:
   SecretId: AKID66u0SqAg7Qitsr3HLH5oCSVLcjdNvGcn
-  SecretKey: 3vcCZkiUAg1EIE0fBanz58GKINkx0sjP
+  SecretKey: *
   cdnDomain: "https://mediahub.ragejxb.xin"
   bucketUrl: "https://mediahubdev-1321582810.cos.ap-chongqing.myqcloud.com"
 dependOn:
